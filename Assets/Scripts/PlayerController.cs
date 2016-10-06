@@ -5,22 +5,33 @@ public class PlayerController : MonoBehaviour {
 	public float speed = 10.0F;
 	public float rotationSpeed = 100.0F;
 
+	private Rigidbody rb;
 	// Use this for initialization
 	void Start () {
-	
+		rb = GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
+
 	void Update () {
-		float rotationX = Input.GetAxis ("Horizontal") * rotationSpeed * Time.deltaTime;
-		if (rotationX == 0) {
-			rotationX = Input.GetAxis ("Mouse X") * rotationSpeed * Time.deltaTime;
-		}
-		float rotationY = Input.GetAxis ("Mouse Y") * rotationSpeed * Time.deltaTime;
+		float rotationX = Input.GetAxis ("Mouse X");
+		float rotationY = Input.GetAxis ("Mouse Y");
 
-		float translation = Input.GetAxis ("Vertical") * speed * Time.deltaTime;
+		transform.Rotate (new Vector3 (0, rotationX, 0) * rotationSpeed * Time.deltaTime);
 
-		transform.Translate (new Vector3 (translation, 0, 0));
-		transform.Rotate (new Vector3 (0, rotationX, 0));
+
 	}
+
+
+	void FixedUpdate () {
+
+		float moveVertical = Input.GetAxis ("Vertical"); 
+		float moveHorizontal = Input.GetAxis ("Horizontal");
+
+		rb.AddForce (transform.forward * moveVertical * speed); 
+		rb.AddForce (transform.right * moveHorizontal * speed);
+		//rb.AddForce (new Vector3(moveHorizontal, 0.0f, moveVertical) * speed);
+	
+	}
+
 }
