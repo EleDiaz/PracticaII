@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ControllerScene : MonoBehaviour {
+public class CollectableController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

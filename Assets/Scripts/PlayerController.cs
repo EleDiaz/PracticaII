@@ -5,21 +5,27 @@ public class PlayerController : MonoBehaviour {
 	public float speed = 10.0F;
 	public float rotationSpeed = 100.0F;
 
+	private SceneController sceneController;
 	private Rigidbody rb;
-	// Use this for initialization
+
+	void Awake () {
+		sceneController = GameObject.Find ("SceneController").GetComponent<SceneController>();
+
+		if (sceneController == null) {
+			Debug.Log ("No sceneController");
+		}
+	}
+
+
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 	}
-	
-	// Update is called once per frame
 
 	void Update () {
 		float rotationX = Input.GetAxis ("Mouse X");
 		float rotationY = Input.GetAxis ("Mouse Y");
 
 		transform.Rotate (new Vector3 (0, rotationX, 0) * rotationSpeed * Time.deltaTime);
-
-
 	}
 
 
@@ -29,9 +35,18 @@ public class PlayerController : MonoBehaviour {
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 
 		rb.AddForce (transform.forward * moveVertical * speed); 
-		rb.AddForce (transform.right * moveHorizontal * speed);
-		//rb.AddForce (new Vector3(moveHorizontal, 0.0f, moveVertical) * speed);
-	
+		rb.AddForce (transform.right * moveHorizontal * speed);	
 	}
 
+	void OnCollisionEnter(Collision collision) {
+		Debug.Log ("On trigger Enter " + collision.gameObject.tag);
+		if (collision.gameObject.tag == "collectable") {
+			Destroy (collision.gameObject);
+			if (sceneController != null) {
+				sceneController.DispathDestroy ();
+			} else {
+				Debug.Log ("Lost SceneController");
+			}
+		}
+	}
 }
