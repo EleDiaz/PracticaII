@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		float rotationX = Input.GetAxis ("Mouse X");
-		float rotationY = Input.GetAxis ("Mouse Y");
 
 		transform.Rotate (new Vector3 (0, rotationX, 0) * rotationSpeed * Time.deltaTime);
 	}
