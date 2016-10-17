@@ -14,7 +14,7 @@ public class CollectableController : MonoBehaviour {
 		renderer = GetComponent<Renderer> ();
 	}
 
-	void ChangeColor() {
+	public void ChangeColor() {
 		renderer.material.color = new Color (Random.value, Random.value, Random.value);
 	}
 
