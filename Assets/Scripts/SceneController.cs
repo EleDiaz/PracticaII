@@ -7,7 +7,7 @@ public class SceneController : MonoBehaviour {
 	public event EventDestroyObject destroyObject;
 
 	void Awake () {
-		Cursor.lockState = CursorLockMode.Locked;
+		//Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	public void DispathDestroy() {
