@@ -16,6 +16,8 @@ public class CollectableController : MonoBehaviour {
 
 	public void ChangeColor() {
 		renderer.material.color = new Color (Random.value, Random.value, Random.value);
+
+		speedRotation = 100 + Random.value * 100;
 	}
 
 	// Update is called once per frame
