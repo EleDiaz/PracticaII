@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CollectableController : MonoBehaviour {
+public class CollectableController : MonoBehaviour, IGvrGazeResponder {
 	[Range(50, 100)]
 	public float speedRotation = 50F;
 
@@ -24,5 +24,20 @@ public class CollectableController : MonoBehaviour {
 	void Update () {
 		rotation = Time.deltaTime * speedRotation;
 		transform.Rotate (new Vector3 (0, rotation, 0));
+	}
+
+	public void OnGazeEnter () {
+		Debug.Log ("GAZE ENTER"); 
+		ChangeColor ();
+		Debug.Log ("GAZE EXIT"); 
+
+	}
+
+	public void OnGazeExit () {
+		
+	}
+
+	public void OnGazeTrigger() {
+		
 	}
 }
